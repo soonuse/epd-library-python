@@ -2,7 +2,7 @@
 Python libraries for Waveshare e-paper series 1.54"/1.54" B/2.13"/2.13" B/2.7"/2.7" B/2.9"/2.9" B/4.2"/4.2 B/7.5"/ 7.5" B
 ## Development environment
   * OS: Raspbian
-  * Libraries: wiringPi/bcm2835/python
+  * Libraries: PIL (Python Image Library)
 ## Raspberry Pi GPIO Pin map 
     +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+
     | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |
