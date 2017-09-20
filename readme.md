@@ -44,4 +44,7 @@ Python libraries for Waveshare e-paper series 1.54"/1.54" B/2.13"/2.13" B/2.7"/2
 2.  Change the current directory to epaper-type/raspberrypi/python
 3.  run the demo with: 
       python main.py
+## Supported models
+1.54"/1.54" B/2.13"/2.13" B/2.7"/2.7" B/2.9"/2.9" B/4.2"/4.2 B/7.5"/ 7.5" B
 
+![gdep015oc1_1.54inch_e-paper](http://www.waveshare.com/img/devkit/general/e-Paper-Modules-CMP.jpg)
