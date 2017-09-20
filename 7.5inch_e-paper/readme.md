@@ -1,4 +1,4 @@
-![gdep015oc1_1.54inch_e-paper](http://www.waveshare.com/img/devkit/general/e-Paper-Modules-CMP.jpg)
+![e-paper display](http://www.waveshare.com/img/devkit/general/e-Paper-Modules-CMP.jpg)
 # Interfaces
 | Name | Description                                                   |
 |------|---------------------------------------------------------------|
