@@ -25,9 +25,9 @@
  ##
 
 import epd2in7
-import Image
-import ImageFont
-import ImageDraw
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
 
 def main():
     epd = epd2in7.EPD()
