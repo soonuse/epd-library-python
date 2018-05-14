@@ -26,9 +26,9 @@
 
 import epd2in13
 import time
-import Image
-import ImageDraw
-import ImageFont
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
 
 def main():
     epd = epd2in13.EPD()
