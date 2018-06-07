@@ -1,5 +1,5 @@
 # Python libraries for Waveshare e-paper series
-Python libraries for Waveshare e-paper series 1.54"/1.54" B/2.13"/2.13" B/2.7"/2.7" B/2.9"/2.9" B/4.2"/4.2 B/7.5"/ 7.5" B
+Python libraries for Waveshare e-paper series
 ## Development environment
   * OS: Raspbian
   * Libraries: PIL (Python Image Library)
