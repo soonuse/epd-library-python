@@ -41,6 +41,7 @@ Python libraries for Waveshare e-paper series
   * BUSY   ->    18 (Physical, BCM: 24)
 ## How to use
 1.  Make sure that Pillow (friendly fork of the Python Image Library) is running well on your Raspberry Pi.
+    <pre>pip install --upgrade Pillow</pre>
 2.  Change the current directory to epaper-type/raspberrypi/python (epaper-type is the type of your e-paper display)
     <pre>cd epaper-type/raspberrypi/python</pre>
 3.  run the demo with: 
