@@ -41,7 +41,7 @@ def epd_digital_write(pin, value):
     GPIO.output(pin, value)
 
 def epd_digital_read(pin):
-    return GPIO.input(BUSY_PIN)
+    return GPIO.input(pin)
 
 def epd_delay_ms(delaytime):
     time.sleep(delaytime / 1000.0)
