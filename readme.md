@@ -2,7 +2,7 @@
 Python libraries for Waveshare e-paper series
 ## Development environment
   * OS: Raspbian
-  * Libraries: PIL (Python Image Library)
+  * Libraries: [Pillow](https://python-pillow.org) -- The friendly fork of the Python Image Library (PIL)
 ## Raspberry Pi GPIO Pin map 
     +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+
     | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |
@@ -40,7 +40,8 @@ Python libraries for Waveshare e-paper series
   * RES    ->    11 (Physical, BCM: 17)
   * BUSY   ->    18 (Physical, BCM: 24)
 ## How to use
-1.  Make sure that the PIL library (Python image library) is running well on your Raspberry Pi.
+1.  Make sure that Pillow (friendly fork of the Python Image Library) is running well on your Raspberry Pi.
+    <pre>pip install --upgrade Pillow</pre>
 2.  Change the current directory to epaper-type/raspberrypi/python (epaper-type is the type of your e-paper display)
     <pre>cd epaper-type/raspberrypi/python</pre>
 3.  run the demo with: 
