@@ -1,28 +1,29 @@
-##
- #  @filename   :   epd1in54.py
- #  @brief      :   Implements for e-paper library
- #  @author     :   Yehui from Waveshare
- #
- #  Copyright (C) Waveshare     September 9 2017
- #
- # Permission is hereby granted, free of charge, to any person obtaining a copy
- # of this software and associated documnetation files (the "Software"), to deal
- # in the Software without restriction, including without limitation the rights
- # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- # copies of the Software, and to permit persons to  whom the Software is
- # furished to do so, subject to the following conditions:
- #
- # The above copyright notice and this permission notice shall be included in
- # all copies or substantial portions of the Software.
- #
- # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- # FITNESS OR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- # LIABILITY WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- # THE SOFTWARE.
- #
+'''
+ @filename   :   epd1in54.py
+ @brief      :   Implements for e-paper library
+ @author     :   Yehui from Waveshare
+
+ Copyright (C) Waveshare
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documnetation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to  whom the Software is
+furished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS OR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+'''
 
 import epdif
 from PIL import Image
@@ -65,16 +66,16 @@ class EPD:
         self.lut = self.lut_full_update
 
     lut_full_update = [
-        0x02, 0x02, 0x01, 0x11, 0x12, 0x12, 0x22, 0x22, 
-        0x66, 0x69, 0x69, 0x59, 0x58, 0x99, 0x99, 0x88, 
-        0x00, 0x00, 0x00, 0x00, 0xF8, 0xB4, 0x13, 0x51, 
+        0x02, 0x02, 0x01, 0x11, 0x12, 0x12, 0x22, 0x22,
+        0x66, 0x69, 0x69, 0x59, 0x58, 0x99, 0x99, 0x88,
+        0x00, 0x00, 0x00, 0x00, 0xF8, 0xB4, 0x13, 0x51,
         0x35, 0x51, 0x51, 0x19, 0x01, 0x00
     ]
 
     lut_partial_update  = [
-        0x10, 0x18, 0x18, 0x08, 0x18, 0x18, 0x08, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-        0x00, 0x00, 0x00, 0x00, 0x13, 0x14, 0x44, 0x12, 
+        0x10, 0x18, 0x18, 0x08, 0x18, 0x18, 0x08, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x13, 0x14, 0x44, 0x12,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     ]
 
@@ -126,58 +127,63 @@ class EPD:
         return 0
 
     def wait_until_idle(self):
-        while(self.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
+        while self.digital_read(self.busy_pin) == 1:      # 0: idle, 1: busy
             self.delay_ms(100)
-##
- #  @brief: module reset.
- #          often used to awaken the module in deep sleep,
- ##
+
     def reset(self):
+        '''
+        @brief: module reset.
+                often used to awaken the module in deep sleep,
+        '''
         self.digital_write(self.reset_pin, GPIO.LOW)         # module reset
         self.delay_ms(200)
         self.digital_write(self.reset_pin, GPIO.HIGH)
-        self.delay_ms(200)    
+        self.delay_ms(200)
 
-##
- #  @brief: set the look-up table register
- ##
     def set_lut(self, lut):
+        '''
+        @brief: set the look-up table register
+        '''
         self.lut = lut
         self.send_command(WRITE_LUT_REGISTER)
         # the length of look-up table is 30 bytes
         for i in range(0, len(lut)):
             self.send_data(self.lut[i])
 
-##
- #  @brief: convert an image to a buffer
- ##
     def get_frame_buffer(self, image):
+        '''
+        @brief: convert an image to a buffer
+        '''
         buf = [0x00] * (self.width * self.height / 8)
         # Set buffer to value of Python Imaging Library image.
         # Image must be in mode 1.
         image_monocolor = image.convert('1')
         imwidth, imheight = image_monocolor.size
         if imwidth != self.width or imheight != self.height:
-            raise ValueError('Image must be same dimensions as display \
-                ({0}x{1}).' .format(self.width, self.height))
+            raise ValueError(
+                'Image must be same dimensions as display ({0}x{1}).'.format(
+                    self.width, self.height
+                )
+            )
 
         pixels = image_monocolor.load()
         for y in range(self.height):
             for x in range(self.width):
-                # Set the bits for the column of pixels at the current position.
+                # Set the bits for the column of pixels
+                # at the current position.
                 if pixels[x, y] != 0:
                     buf[(x + y * self.width) / 8] |= 0x80 >> (x % 8)
         return buf
 
-##
- #  @brief: put an image to the frame memory.
- #          this won't update the display.
- ##
     def set_frame_memory(self, image, x, y):
-        if (image == None or x < 0 or y < 0):
+        '''
+        @brief: put an image to the frame memory.
+                this won't update the display.
+         '''
+        if image is None or x < 0 or y < 0:
             return
         image_monocolor = image.convert('1')
-        image_width, image_height  = image_monocolor.size
+        image_width, image_height = image_monocolor.size
         # x point must be the multiple of 8 or the last 3 bits will be ignored
         x = x & 0xF8
         image_width = image_width & 0xF8
@@ -198,18 +204,19 @@ class EPD:
         for j in range(0, y_end - y + 1):
             # 1 byte = 8 pixels, steps of i = 8
             for i in range(0, x_end - x + 1):
-                # Set the bits for the column of pixels at the current position.
+                # Set the bits for the column of pixels
+                # at the current position.
                 if pixels[i, j] != 0:
                     byte_to_send |= 0x80 >> (i % 8)
                 if (i % 8 == 7):
                     self.send_data(byte_to_send)
                     byte_to_send = 0x00
 
-##
- #  @brief: clear the frame memory with the specified color.
- #          this won't update the display.
- ##
     def clear_frame_memory(self, color):
+        '''
+        @brief: clear the frame memory with the specified color.
+        this won't update the display.
+        '''
         self.set_memory_area(0, 0, self.width - 1, self.height - 1)
         self.set_memory_pointer(0, 0)
         self.send_command(WRITE_RAM)
@@ -217,24 +224,25 @@ class EPD:
         for i in range(0, self.width / 8 * self.height):
             self.send_data(color)
 
-##
- #  @brief: update the display
- #          there are 2 memory areas embedded in the e-paper display
- #          but once this function is called,
- #          the the next action of SetFrameMemory or ClearFrame will 
- #          set the other memory area.
- ##
     def display_frame(self):
+        '''
+        @brief: update the display
+                there are 2 memory areas embedded in the e-paper display
+                but once this function is called,
+                the the next action of SetFrameMemory or ClearFrame will
+                set the other memory area.
+        '''
+
         self.send_command(DISPLAY_UPDATE_CONTROL_2)
         self.send_data(0xC4)
         self.send_command(MASTER_ACTIVATION)
         self.send_command(TERMINATE_FRAME_READ_WRITE)
         self.wait_until_idle()
 
-##
- #  @brief: specify the memory area for data R/W
- ##
     def set_memory_area(self, x_start, y_start, x_end, y_end):
+        '''
+        @brief: specify the memory area for data R/W
+        '''
         self.send_command(SET_RAM_X_ADDRESS_START_END_POSITION)
         # x point must be the multiple of 8 or the last 3 bits will be ignored
         self.send_data((x_start >> 3) & 0xFF)
@@ -245,10 +253,10 @@ class EPD:
         self.send_data(y_end & 0xFF)
         self.send_data((y_end >> 8) & 0xFF)
 
-##
- #  @brief: specify the start point for data R/W
- ##
     def set_memory_pointer(self, x, y):
+        '''
+        @brief: specify the start point for data R/W
+        '''
         self.send_command(SET_RAM_X_ADDRESS_COUNTER)
         # x point must be the multiple of 8 or the last 3 bits will be ignored
         self.send_data((x >> 3) & 0xFF)
@@ -257,15 +265,12 @@ class EPD:
         self.send_data((y >> 8) & 0xFF)
         self.wait_until_idle()
 
-##
- #  @brief: After this command is transmitted, the chip would enter the
- #          deep-sleep mode to save power.
- #          The deep sleep mode would return to standby by hardware reset.
- #          You can use reset() to awaken or init() to initialize
- ##
     def sleep(self):
+        '''
+        @brief: After this command is transmitted, the chip would enter the
+                deep-sleep mode to save power.
+                The deep sleep mode would return to standby by hardware reset.
+                You can use reset() to awaken or init() to initialize
+        '''
         self.send_command(DEEP_SLEEP_MODE)
         self.wait_until_idle()
-
-### END OF FILE ###
-
