@@ -48,5 +48,3 @@ Python libraries for Waveshare e-paper series
     <pre>python main.py</pre>
 ## Supported models
 1.54"/1.54" B/2.13"/2.13" B/2.7"/2.7" B/2.9"/2.9" B/4.2"/4.2 B/7.5"/ 7.5" B
-
-![e-paper display](http://www.waveshare.com/img/devkit/general/e-Paper-Modules-CMP.jpg)
