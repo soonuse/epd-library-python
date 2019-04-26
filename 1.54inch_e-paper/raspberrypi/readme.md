@@ -40,23 +40,6 @@ GDEP015OC1 e-paper library for Raspberry Pi
   * RES    ->    11 (Physical, BCM: 17)
   * BUSY   ->    18 (Physical, BCM: 24)
 ## How to use
-### based on WiringPi library
-1.  install the C libraries of wiringPi,
-    see: http://wiringpi.com/download-and-install/
-    fortunately, in the latest version of Raspbian, wiringPi libraries are
-    pre-installed.
-2.  change the current directory to where the Makefile and demo file located.
-3.  compile the file with: 
-      make
-4.  run the demo with: 
-      sudo ./epd
-### based on BCM2835 library
-1.  install the C libraries of bcm2835, see: http://www.airspayce.com/mikem/bcm2835/
-2.  change the current directory to where the Makefile and demo files located.
-3.  compile the file with: 
-      make
-4.  run the demo with: 
-      sudo ./epd
 ### based on Python
 1.  install the PIL library (Python image library).
 2.  run the demo with: 
