@@ -40,7 +40,6 @@ GDEP015OC1 e-paper library for Raspberry Pi
   * RES    ->    11 (Physical, BCM: 17)
   * BUSY   ->    18 (Physical, BCM: 24)
 ## How to use
-### based on Python
 1.  install the PIL library (Python image library).
 2.  run the demo with: 
       python main.py
