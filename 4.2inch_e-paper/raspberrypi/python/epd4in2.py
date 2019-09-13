@@ -74,11 +74,11 @@ POWER_SAVING                                = 0xE3
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdif.RST_PIN;
-        self.dc_pin = epdif.DC_PIN;
-        self.busy_pin = epdif.BUSY_PIN;
-        self.width = EPD_WIDTH;
-        self.height = EPD_HEIGHT;
+        self.reset_pin = epdif.RST_PIN
+        self.dc_pin = epdif.DC_PIN
+        self.busy_pin = epdif.BUSY_PIN
+        self.width = EPD_WIDTH
+        self.height = EPD_HEIGHT
 
     lut_vcom0 = [
         0x00, 0x17, 0x00, 0x00, 0x00, 0x02,      

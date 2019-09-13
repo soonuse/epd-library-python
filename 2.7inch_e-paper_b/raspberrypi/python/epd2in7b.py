@@ -448,8 +448,8 @@ class EPD:
             self.set_pixel(frame_buffer, x + x_pos, y + y_pos, colored)
             self.set_pixel(frame_buffer, x + x_pos, y - y_pos, colored)
             self.set_pixel(frame_buffer, x - x_pos, y - y_pos, colored)
-            self.draw_horizontal_line(frame_buffer, x + x_pos, y + y_pos, 2 * (-x_pos) + 1, colored);
-            self.draw_horizontal_line(frame_buffer, x + x_pos, y - y_pos, 2 * (-x_pos) + 1, colored);
+            self.draw_horizontal_line(frame_buffer, x + x_pos, y + y_pos, 2 * (-x_pos) + 1, colored)
+            self.draw_horizontal_line(frame_buffer, x + x_pos, y - y_pos, 2 * (-x_pos) + 1, colored)
             e2 = err
             if (e2 <= y_pos):
                 y_pos += 1

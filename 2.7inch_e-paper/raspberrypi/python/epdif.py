@@ -63,6 +63,6 @@ def epd_init():
 
     SPI.max_speed_hz = 2000000
     SPI.mode = 0b00
-    return 0;
+    return 0
 
 ### END OF FILE ###
