@@ -221,8 +221,7 @@ class EPD:
         self.set_memory_pointer(0, 0)
         self.send_command(WRITE_RAM)
         # send the color data
-        for i in range(0, self.width / 8 * self.height):
-            self.send_data(color)
+        self.send_data(color)
 
     def display_frame(self):
         '''
