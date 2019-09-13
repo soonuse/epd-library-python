@@ -259,7 +259,7 @@ class EPD:
             self.send_data(self.lut_wb[count])
 
     def get_frame_buffer(self, image):
-        buf = [0xFF] * (self.width * self.height / 8)
+        buf = [0xFF] * int(self.width * self.height / 8)
         # Set buffer to value of Python Imaging Library image.
         # Image must be in mode 1.
         image_monocolor = image.convert('1')
@@ -273,7 +273,7 @@ class EPD:
             for x in range(self.width):
                 # Set the bits for the column of pixels at the current position.
                 if pixels[x, y] != 0:
-                    buf[(x + y * self.width) / 8] &= ~(0x80 >> (x % 8))
+                    buf[int((x + y * self.width) / 8)] &= ~(0x80 >> (x % 8))
         return buf
 
     def display_frame(self, frame_buffer_black, frame_buffer_red):
@@ -286,13 +286,13 @@ class EPD:
         if (frame_buffer_black != None):
             self.send_command(DATA_START_TRANSMISSION_1)           
             self.delay_ms(2)
-            for i in range(0, self.width * self.height / 8):
+            for i in range(0, int(self.width * self.height / 8)):
                 self.send_data(frame_buffer_black[i])  
             self.delay_ms(2)                  
         if (frame_buffer_red != None):
             self.send_command(DATA_START_TRANSMISSION_2)
             self.delay_ms(2)
-            for i in range(0, self.width * self.height / 8):
+            for i in range(0, int(self.width * self.height / 8)):
                 self.send_data(frame_buffer_red[i])  
             self.delay_ms(2)        
 
@@ -353,9 +353,9 @@ class EPD:
         if (x < 0 or x >= EPD_WIDTH or y < 0 or y >= EPD_HEIGHT):
             return
         if (colored):
-            frame_buffer[(x + y * EPD_WIDTH) / 8] |= 0x80 >> (x % 8)
+            frame_buffer[int((x + y * EPD_WIDTH) / 8)] |= 0x80 >> (x % 8)
         else:
-            frame_buffer[(x + y * EPD_WIDTH) / 8] &= ~(0x80 >> (x % 8))
+            frame_buffer[int((x + y * EPD_WIDTH) / 8)] &= ~(0x80 >> (x % 8))
 
     def draw_string_at(self, frame_buffer, x, y, text, font, colored):
         image = Image.new('1', (self.width, self.height))
