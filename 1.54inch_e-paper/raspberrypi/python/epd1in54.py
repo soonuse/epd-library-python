@@ -154,7 +154,7 @@ class EPD:
         '''
         @brief: convert an image to a buffer
         '''
-        buf = [0x00] * (self.width * self.height / 8)
+        buf = [0x00] * int(self.width * self.height / 8)
         # Set buffer to value of Python Imaging Library image.
         # Image must be in mode 1.
         image_monocolor = image.convert('1')
@@ -172,7 +172,7 @@ class EPD:
                 # Set the bits for the column of pixels
                 # at the current position.
                 if pixels[x, y] != 0:
-                    buf[(x + y * self.width) / 8] |= 0x80 >> (x % 8)
+                    buf[int((x + y * self.width) / 8)] |= 0x80 >> (x % 8)
         return buf
 
     def set_frame_memory(self, image, x, y):
@@ -221,8 +221,7 @@ class EPD:
         self.set_memory_pointer(0, 0)
         self.send_command(WRITE_RAM)
         # send the color data
-        for i in range(0, self.width / 8 * self.height):
-            self.send_data(color)
+        self.send_data(color)
 
     def display_frame(self):
         '''

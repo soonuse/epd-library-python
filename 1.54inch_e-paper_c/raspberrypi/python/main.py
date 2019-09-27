@@ -43,13 +43,13 @@ def main():
     frame_red = [0xFF] * (epd.width * epd.height / 8)
 
     # For simplicity, the arguments are explicit numerical coordinates
-    epd.draw_rectangle(frame_black, 10, 60, 50, 110, COLORED);
-    epd.draw_line(frame_black, 10, 60, 50, 110, COLORED);
-    epd.draw_line(frame_black, 50, 60, 10, 110, COLORED);
-    epd.draw_circle(frame_black, 100, 80, 30, COLORED);
-#    epd.draw_filled_rectangle(frame_red, 10, 130, 50, 180, COLORED);
-    epd.draw_filled_rectangle(frame_red, 0, 6, 152, 26, COLORED);
-#    epd.draw_filled_circle(frame_red, 120, 150, 30, COLORED);
+    epd.draw_rectangle(frame_black, 10, 60, 50, 110, COLORED)
+    epd.draw_line(frame_black, 10, 60, 50, 110, COLORED)
+    epd.draw_line(frame_black, 50, 60, 10, 110, COLORED)
+    epd.draw_circle(frame_black, 100, 80, 30, COLORED)
+#    epd.draw_filled_rectangle(frame_red, 10, 130, 50, 180, COLORED)
+    epd.draw_filled_rectangle(frame_red, 0, 6, 152, 26, COLORED)
+#    epd.draw_filled_circle(frame_red, 120, 150, 30, COLORED)
 
     # write strings to the buffer
     font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf', 18)

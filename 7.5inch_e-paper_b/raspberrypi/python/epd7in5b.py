@@ -145,7 +145,7 @@ class EPD:
         self.delay_ms(200)    
 
     def get_frame_buffer(self, image):
-        buf = [0x00] * (self.width * self.height / 4)
+        buf = [0x00] * int(self.width * self.height / 4)
         # Set buffer to value of Python Imaging Library image.
         # Image must be in mode L.
         image_grayscale = image.convert('L')
@@ -159,17 +159,17 @@ class EPD:
             for x in range(self.width):
                 # Set the bits for the column of pixels at the current position.
                 if pixels[x, y] < 64:           # black
-                    buf[(x + y * self.width) / 4] &= ~(0xC0 >> (x % 4 * 2))
+                    buf[int((x + y * self.width) / 4)] &= ~(0xC0 >> (x % 4 * 2))
                 elif pixels[x, y] < 192:     # convert gray to red
-                    buf[(x + y * self.width) / 4] &= ~(0xC0 >> (x % 4 * 2))
-                    buf[(x + y * self.width) / 4] |= 0x40 >> (x % 4 * 2)
+                    buf[int((x + y * self.width) / 4)] &= ~(0xC0 >> (x % 4 * 2))
+                    buf[int((x + y * self.width) / 4)] |= 0x40 >> (x % 4 * 2)
                 else:                           # white
-                    buf[(x + y * self.width) / 4] |= 0xC0 >> (x % 4 * 2)
+                    buf[int((x + y * self.width) / 4)] |= 0xC0 >> (x % 4 * 2)
         return buf
 
     def display_frame(self, frame_buffer):
         self.send_command(DATA_START_TRANSMISSION_1)
-        for i in range(0, self.width / 4 * self.height):
+        for i in range(0, int(self.width / 4 * self.height)):
             temp1 = frame_buffer[i]
             j = 0
             while (j < 4):
