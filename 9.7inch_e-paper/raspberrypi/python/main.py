@@ -41,7 +41,7 @@ def main():
     image = Image.new('1', (EPD_WIDTH, EPD_HEIGHT), 1)    # 1: clear the frame
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf', 24)
-    draw.rectangle((0, 6, 640, 30), fill = 0)
+    draw.rectangle((0, 6, 1200, 30), fill = 0)
     draw.text((200, 10), 'e-Paper demo', font = font, fill = 255)
     draw.rectangle((200, 80, 600, 280), fill = 0)
     draw.arc((240, 120, 580, 220), 0, 360, fill = 255)
